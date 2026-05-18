@@ -1,0 +1,1499 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>زكاة غزة — إغاثة إنسانية | Gaza Zakat Aid</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Amiri:wght@400;700&display=swap" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
+  <style>
+    /* ── Reset & Base ──────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --green-deep:   #1a5c3a;
+      --green-mid:    #2d7a52;
+      --green-light:  #3da06d;
+      --orange:       #e8600a;
+      --orange-light: #f07d30;
+      --white:        #ffffff;
+      --gray-50:      #f9fafb;
+      --gray-100:     #f3f4f6;
+      --gray-200:     #e5e7eb;
+      --gray-400:     #9ca3af;
+      --gray-600:     #4b5563;
+      --gray-800:     #1f2937;
+      --shadow-sm:    0 1px 3px rgba(0,0,0,.1);
+      --shadow-md:    0 4px 20px rgba(0,0,0,.12);
+      --shadow-lg:    0 10px 40px rgba(0,0,0,.18);
+      --radius:       14px;
+      --transition:   .3s cubic-bezier(.4,0,.2,1);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      color: var(--gray-800);
+      background: var(--white);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    [dir="rtl"] body,
+    [dir="rtl"] * { font-family: 'Amiri', 'Inter', sans-serif; }
+
+    /* ── Utility ───────────────────────────────────────────── */
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+    .section   { padding: 90px 0; }
+    .section-sm{ padding: 60px 0; }
+    .tag       { display: inline-flex; align-items: center; gap: 6px; background: rgba(26,92,58,.1); color: var(--green-deep); font-size: .78rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; padding: 6px 14px; border-radius: 50px; margin-bottom: 16px; }
+    .section-title { font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 800; color: var(--gray-800); line-height: 1.2; margin-bottom: 14px; }
+    .section-sub   { font-size: 1.05rem; color: var(--gray-600); max-width: 560px; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 14px 28px; border-radius: 50px; font-size: .95rem;
+      font-weight: 700; cursor: pointer; border: none; text-decoration: none;
+      transition: var(--transition); white-space: nowrap;
+    }
+    .btn-primary { background: var(--orange); color: #fff; box-shadow: 0 4px 20px rgba(232,96,10,.35); }
+    .btn-primary:hover { background: #c95209; transform: translateY(-2px); box-shadow: 0 8px 28px rgba(232,96,10,.45); }
+    .btn-outline { background: transparent; color: var(--white); border: 2px solid rgba(255,255,255,.7); }
+    .btn-outline:hover { background: rgba(255,255,255,.12); border-color: #fff; }
+    .btn-green  { background: var(--green-deep); color: #fff; }
+    .btn-green:hover { background: var(--green-mid); transform: translateY(-2px); }
+
+    /* ── Navbar ────────────────────────────────────────────── */
+    #navbar {
+      position: fixed; top: 0; width: 100%; z-index: 1000;
+      background: rgba(255,255,255,.92); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--gray-200);
+      transition: var(--transition);
+    }
+    #navbar.scrolled { box-shadow: var(--shadow-md); }
+    .nav-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      height: 72px;
+    }
+    .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .logo-icon {
+      width: 42px; height: 42px; background: var(--green-deep);
+      border-radius: 10px; display: flex; align-items: center; justify-content: center;
+      font-size: 1.3rem; color: #fff;
+    }
+    .logo-text { font-size: 1.15rem; font-weight: 800; color: var(--green-deep); }
+    .logo-text span { color: var(--orange); }
+
+    /* ── WhatsApp Floating Button ─────────────────────────── */
+    .wa-float {
+      position: fixed; bottom: 88px; right: 28px; z-index: 900;
+      background: #25d366; color: #fff; border: none; border-radius: 50px;
+      padding: 13px 20px; font-size: .9rem; font-weight: 700;
+      display: flex; align-items: center; gap: 9px; cursor: pointer;
+      box-shadow: 0 6px 24px rgba(37,211,102,.45); text-decoration: none;
+      transition: var(--transition); white-space: nowrap;
+    }
+    .wa-float:hover { background: #1fb558; transform: translateY(-3px); box-shadow: 0 10px 32px rgba(37,211,102,.55); }
+    .wa-float i { font-size: 1.25rem; }
+    .wa-float-pulse {
+      position: absolute; top: -4px; right: -4px; width: 14px; height: 14px;
+      background: var(--orange); border-radius: 50%; border: 2px solid #fff;
+      animation: blink 1.4s infinite;
+    }
+
+    /* ── How To Donate Section ────────────────────────────── */
+    .how-donate-section { background: linear-gradient(135deg,#f0faf4,#e6f4ec); }
+    .how-steps { display: grid; grid-template-columns: repeat(auto-fit,minmax(220px,1fr)); gap: 24px; margin-top: 50px; }
+    .how-step {
+      background: #fff; border-radius: var(--radius); padding: 30px 24px;
+      text-align: center; border: 1px solid var(--gray-200); box-shadow: var(--shadow-sm);
+      transition: var(--transition); position: relative;
+    }
+    .how-step:hover { transform: translateY(-5px); box-shadow: var(--shadow-md); border-color: var(--green-light); }
+    .how-step-num {
+      position: absolute; top: -16px; left: 50%; transform: translateX(-50%);
+      width: 34px; height: 34px; background: var(--green-deep); color: #fff;
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      font-size: .9rem; font-weight: 800; border: 3px solid #fff; box-shadow: var(--shadow-sm);
+    }
+    .how-step-icon { font-size: 2rem; margin-bottom: 14px; margin-top: 8px; }
+    .how-step h3  { font-size: 1rem; font-weight: 700; margin-bottom: 8px; color: var(--gray-800); }
+    .how-step p   { font-size: .85rem; color: var(--gray-600); line-height: 1.6; }
+    .wa-cta-big {
+      display: flex; align-items: center; justify-content: center; gap: 14px;
+      background: #25d366; color: #fff; border-radius: var(--radius); padding: 24px 32px;
+      margin-top: 40px; text-decoration: none; font-size: 1.1rem; font-weight: 800;
+      box-shadow: 0 6px 28px rgba(37,211,102,.4); transition: var(--transition);
+    }
+    .wa-cta-big:hover { background: #1fb558; transform: translateY(-3px); box-shadow: 0 12px 36px rgba(37,211,102,.5); }
+    .wa-cta-big i { font-size: 1.8rem; }
+    .wa-cta-big-text { }
+    .wa-cta-big-text div:first-child { font-size: 1.2rem; }
+    .wa-cta-big-text div:last-child  { font-size: .82rem; opacity: .85; font-weight: 500; margin-top: 2px; }
+
+    /* ── About / Real Org Section ─────────────────────────── */
+    .about-section { background: #fff; }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+    .about-img-stack { position: relative; height: 420px; }
+    .about-img-main {
+      position: absolute; top: 0; left: 0; width: 75%; height: 85%;
+      border-radius: 20px; overflow: hidden; box-shadow: var(--shadow-lg);
+    }
+    .about-img-main img { width: 100%; height: 100%; object-fit: cover; }
+    .about-img-secondary {
+      position: absolute; bottom: 0; right: 0; width: 55%; height: 55%;
+      border-radius: 16px; overflow: hidden; box-shadow: var(--shadow-lg);
+      border: 4px solid #fff;
+    }
+    .about-img-secondary img { width: 100%; height: 100%; object-fit: cover; }
+    .about-badge {
+      position: absolute; top: 50%; left: 60%; transform: translate(-50%,-50%);
+      background: var(--orange); color: #fff; border-radius: 14px; padding: 14px 18px;
+      text-align: center; box-shadow: var(--shadow-md); border: 3px solid #fff; z-index: 2;
+    }
+    .about-badge-num { font-size: 1.5rem; font-weight: 900; }
+    .about-badge-label { font-size: .7rem; font-weight: 600; opacity: .9; }
+    .about-text { }
+    .about-text p { font-size: .97rem; color: var(--gray-600); line-height: 1.8; margin-bottom: 16px; }
+    .about-socials { display: flex; gap: 12px; margin-top: 24px; flex-wrap: wrap; }
+    .about-social-btn {
+      display: inline-flex; align-items: center; gap: 8px; padding: 11px 18px;
+      border-radius: 50px; font-size: .88rem; font-weight: 700; text-decoration: none;
+      transition: var(--transition);
+    }
+    .about-social-btn:hover { transform: translateY(-2px); }
+    .about-social-fb { background: #1877f2; color: #fff; }
+    .about-social-ig { background: linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888); color: #fff; }
+    .about-social-wa { background: #25d366; color: #fff; }
+    @media (max-width: 768px) {
+      .about-grid { grid-template-columns: 1fr; }
+      .about-img-stack { height: 280px; }
+    }
+
+    .nav-links { display: flex; align-items: center; gap: 32px; list-style: none; }
+    .nav-links a { text-decoration: none; color: var(--gray-600); font-size: .92rem; font-weight: 500; transition: var(--transition); }
+    .nav-links a:hover { color: var(--green-deep); }
+
+    .nav-right { display: flex; align-items: center; gap: 14px; }
+    .lang-btn {
+      background: var(--gray-100); border: none; cursor: pointer;
+      padding: 7px 14px; border-radius: 50px; font-size: .82rem; font-weight: 600;
+      color: var(--gray-600); transition: var(--transition); display: flex; align-items: center; gap: 6px;
+    }
+    .lang-btn:hover { background: var(--gray-200); }
+
+    .burger {
+      display: none; flex-direction: column; gap: 5px; cursor: pointer;
+      background: none; border: none; padding: 4px;
+    }
+    .burger span { width: 24px; height: 2px; background: var(--gray-800); border-radius: 2px; transition: var(--transition); }
+
+    .mobile-menu {
+      display: none; position: fixed; top: 72px; left: 0; right: 0;
+      background: #fff; padding: 20px; border-bottom: 1px solid var(--gray-200);
+      box-shadow: var(--shadow-md); z-index: 999;
+    }
+    .mobile-menu.open { display: flex; flex-direction: column; gap: 16px; }
+    .mobile-menu a { color: var(--gray-800); font-weight: 600; text-decoration: none; font-size: 1rem; padding: 10px 0; border-bottom: 1px solid var(--gray-100); }
+
+    /* ── Hero ──────────────────────────────────────────────── */
+    #hero {
+      position: relative; min-height: 100vh;
+      display: flex; align-items: center; padding-top: 72px;
+      background: linear-gradient(135deg, var(--green-deep) 0%, #0f3a23 50%, #1a2a1a 100%);
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background: url('https://images.unsplash.com/photo-1603988363607-e1e4a66962c6?w=1600&q=80&fit=crop') center/cover no-repeat;
+      opacity: .18; filter: grayscale(.4);
+    }
+    .hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(26,92,58,.92) 0%, rgba(15,58,35,.88) 60%, rgba(0,0,0,.7) 100%);
+    }
+    .hero-particles { position: absolute; inset: 0; pointer-events: none; }
+    .particle {
+      position: absolute; border-radius: 50%;
+      background: rgba(255,255,255,.08); animation: float 8s infinite ease-in-out;
+    }
+
+    @keyframes float {
+      0%,100% { transform: translateY(0) scale(1); opacity: .6; }
+      50%      { transform: translateY(-30px) scale(1.1); opacity: .3; }
+    }
+
+    .hero-content { position: relative; z-index: 2; max-width: 700px; }
+    .hero-tag { display: inline-flex; align-items: center; gap: 8px; background: rgba(232,96,10,.2); border: 1px solid rgba(232,96,10,.4); color: #ffa060; padding: 7px 16px; border-radius: 50px; font-size: .82rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; margin-bottom: 24px; }
+    .hero-tag-dot { width: 8px; height: 8px; background: var(--orange); border-radius: 50%; animation: blink 1.4s infinite; }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:.3} }
+
+    .hero h1 {
+      font-size: clamp(2.2rem, 5.5vw, 3.8rem); font-weight: 900;
+      color: #fff; line-height: 1.12; margin-bottom: 22px;
+    }
+    .hero h1 span { color: var(--orange-light); }
+    .hero p { font-size: 1.15rem; color: rgba(255,255,255,.82); margin-bottom: 36px; line-height: 1.7; max-width: 580px; }
+
+    .hero-btns { display: flex; flex-wrap: wrap; gap: 14px; margin-bottom: 50px; }
+
+    .hero-stats {
+      display: flex; flex-wrap: wrap; gap: 24px;
+      border-top: 1px solid rgba(255,255,255,.15); padding-top: 36px;
+    }
+    .hero-stat { }
+    .hero-stat-num { font-size: 1.7rem; font-weight: 900; color: var(--orange-light); }
+    .hero-stat-label { font-size: .8rem; color: rgba(255,255,255,.6); font-weight: 500; text-transform: uppercase; letter-spacing: .06em; }
+
+    .hero-image-side {
+      position: relative; z-index: 2;
+      display: flex; align-items: center; justify-content: flex-end;
+    }
+    .hero-card {
+      background: rgba(255,255,255,.07); backdrop-filter: blur(16px);
+      border: 1px solid rgba(255,255,255,.15); border-radius: 20px;
+      padding: 28px; color: #fff; width: 280px;
+    }
+    .hero-card-live { display: flex; align-items: center; gap: 8px; font-size: .78rem; font-weight: 700; color: #ffa060; text-transform: uppercase; margin-bottom: 14px; }
+    .hero-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 6px; }
+    .hero-card p  { font-size: .85rem; color: rgba(255,255,255,.7); margin-bottom: 16px; }
+    .mini-progress { background: rgba(255,255,255,.15); border-radius: 50px; height: 6px; margin-bottom: 10px; }
+    .mini-progress-bar { height: 6px; border-radius: 50px; background: var(--orange); }
+    .mini-progress-label { display: flex; justify-content: space-between; font-size: .75rem; color: rgba(255,255,255,.65); }
+
+    /* ── Urgency Banner ────────────────────────────────────── */
+    .urgency-bar {
+      background: linear-gradient(90deg, #7f1d1d, var(--orange), #7f1d1d);
+      background-size: 200% 100%; animation: shimmer-bar 4s linear infinite;
+      color: #fff; text-align: center; padding: 12px 20px;
+      font-size: .88rem; font-weight: 600; letter-spacing: .02em;
+    }
+    @keyframes shimmer-bar { 0%{background-position:0% 0%} 100%{background-position:200% 0%} }
+    .urgency-bar i { margin: 0 8px; }
+
+    /* ── Impact Dashboard ──────────────────────────────────── */
+    #impact { background: var(--gray-50); }
+    .impact-header { text-align: center; margin-bottom: 60px; }
+    .impact-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 24px;
+    }
+    .impact-card {
+      background: #fff; border-radius: var(--radius); padding: 36px 24px;
+      text-align: center; box-shadow: var(--shadow-sm); border: 1px solid var(--gray-200);
+      transition: var(--transition);
+    }
+    .impact-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); border-color: var(--green-light); }
+    .impact-icon {
+      width: 64px; height: 64px; border-radius: 16px; margin: 0 auto 18px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.6rem;
+    }
+    .impact-num { font-size: 2.4rem; font-weight: 900; color: var(--green-deep); line-height: 1; margin-bottom: 6px; }
+    .impact-label { font-size: .88rem; color: var(--gray-600); font-weight: 500; }
+
+    /* ── Campaigns ─────────────────────────────────────────── */
+    #campaigns { background: #fff; }
+    .campaigns-header { margin-bottom: 50px; }
+    .campaigns-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 28px; }
+
+    .campaign-card {
+      border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow-sm);
+      border: 1px solid var(--gray-200); transition: var(--transition); background: #fff;
+    }
+    .campaign-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
+
+    .campaign-img {
+      height: 200px; position: relative; overflow: hidden;
+      background: linear-gradient(135deg, var(--green-deep), var(--green-light));
+    }
+    .campaign-img img { width: 100%; height: 100%; object-fit: cover; }
+    .campaign-category {
+      position: absolute; top: 14px; left: 14px;
+      background: var(--orange); color: #fff; font-size: .72rem; font-weight: 700;
+      padding: 4px 12px; border-radius: 50px; text-transform: uppercase; letter-spacing: .06em;
+    }
+    .campaign-urgent {
+      position: absolute; top: 14px; right: 14px;
+      background: rgba(127,29,29,.85); color: #fff; font-size: .72rem; font-weight: 700;
+      padding: 4px 12px; border-radius: 50px; display: flex; align-items: center; gap: 5px;
+    }
+    .campaign-body { padding: 22px; }
+    .campaign-body h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 8px; color: var(--gray-800); }
+    .campaign-body p  { font-size: .87rem; color: var(--gray-600); margin-bottom: 18px; line-height: 1.6; }
+
+    .progress-bar-wrap { margin-bottom: 14px; }
+    .progress-labels { display: flex; justify-content: space-between; font-size: .78rem; margin-bottom: 6px; }
+    .progress-raised { font-weight: 700; color: var(--green-deep); }
+    .progress-goal   { color: var(--gray-400); }
+    .progress-track  { background: var(--gray-200); border-radius: 50px; height: 8px; }
+    .progress-fill   { height: 8px; border-radius: 50px; background: linear-gradient(90deg, var(--green-mid), var(--green-light)); transition: width 1.4s cubic-bezier(.4,0,.2,1); }
+    .progress-pct    { font-size: .78rem; font-weight: 700; color: var(--orange); margin-top: 5px; }
+
+    .campaign-footer { display: flex; align-items: center; justify-content: space-between; margin-top: 16px; }
+    .donors-count { font-size: .78rem; color: var(--gray-400); display: flex; align-items: center; gap: 5px; }
+
+    /* ── Trust / Updates ───────────────────────────────────── */
+    #updates { background: var(--gray-50); }
+    .updates-header { margin-bottom: 50px; }
+    .updates-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+    .update-main {
+      border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow-md);
+      grid-row: span 2; position: relative; min-height: 400px;
+      background: linear-gradient(135deg, var(--green-deep), #0f3a23);
+      display: flex; flex-direction: column; justify-content: flex-end;
+    }
+    .update-main img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: .7; }
+    .update-main-body { position: relative; z-index: 2; padding: 28px; background: linear-gradient(0deg, rgba(0,0,0,.75), transparent); }
+    .update-tag { background: var(--orange); color: #fff; font-size: .72rem; font-weight: 700; padding: 4px 12px; border-radius: 50px; text-transform: uppercase; display: inline-block; margin-bottom: 10px; }
+    .update-main-body h3 { color: #fff; font-size: 1.2rem; font-weight: 700; margin-bottom: 8px; }
+    .update-main-body p  { color: rgba(255,255,255,.75); font-size: .87rem; }
+    .update-date { color: rgba(255,255,255,.55); font-size: .78rem; margin-top: 10px; display: flex; align-items: center; gap: 6px; }
+
+    .update-small {
+      border-radius: var(--radius); overflow: hidden; background: #fff;
+      box-shadow: var(--shadow-sm); border: 1px solid var(--gray-200);
+      display: flex; align-items: stretch; transition: var(--transition);
+    }
+    .update-small:hover { box-shadow: var(--shadow-md); }
+    .update-small-img { width: 110px; flex-shrink: 0; background: var(--green-deep); overflow: hidden; }
+    .update-small-img img { width: 100%; height: 100%; object-fit: cover; }
+    .update-small-body { padding: 18px; }
+    .update-small-body h4 { font-size: .9rem; font-weight: 700; margin-bottom: 6px; color: var(--gray-800); }
+    .update-small-body p  { font-size: .8rem; color: var(--gray-600); }
+    .update-small-date { font-size: .75rem; color: var(--gray-400); margin-top: 8px; display: flex; align-items: center; gap: 5px; }
+
+    .trust-badges {
+      display: flex; flex-wrap: wrap; align-items: center; gap: 28px;
+      background: #fff; border-radius: var(--radius); padding: 28px 32px;
+      border: 1px solid var(--gray-200); margin-top: 50px; box-shadow: var(--shadow-sm);
+    }
+    .trust-badges-label { font-size: .82rem; font-weight: 700; color: var(--gray-400); text-transform: uppercase; letter-spacing: .08em; }
+    .trust-badge { display: flex; align-items: center; gap: 8px; color: var(--gray-600); font-size: .88rem; font-weight: 600; }
+    .trust-badge i { color: var(--green-mid); font-size: 1rem; }
+
+    /* ── Testimonials ──────────────────────────────────────── */
+    #testimonials { background: linear-gradient(135deg, var(--green-deep) 0%, #0f3a23 100%); color: #fff; }
+    .testimonials-header { text-align: center; margin-bottom: 50px; }
+    .testimonials-header .section-title { color: #fff; }
+    .testimonials-header .section-sub   { color: rgba(255,255,255,.7); margin: 0 auto; }
+    .testimonials-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; }
+    .testimonial-card {
+      background: rgba(255,255,255,.08); backdrop-filter: blur(8px);
+      border: 1px solid rgba(255,255,255,.12); border-radius: var(--radius); padding: 28px;
+    }
+    .testimonial-stars { color: #fbbf24; font-size: .9rem; margin-bottom: 14px; }
+    .testimonial-card p { font-size: .95rem; color: rgba(255,255,255,.85); line-height: 1.7; margin-bottom: 20px; font-style: italic; }
+    .testimonial-author { display: flex; align-items: center; gap: 12px; }
+    .testimonial-avatar { width: 44px; height: 44px; border-radius: 50%; background: var(--green-mid); display: flex; align-items: center; justify-content: center; font-size: 1rem; font-weight: 700; color: #fff; }
+    .testimonial-name   { font-weight: 700; font-size: .9rem; }
+    .testimonial-role   { font-size: .78rem; color: rgba(255,255,255,.55); }
+
+    /* ── FAQ ───────────────────────────────────────────────── */
+    #faq { background: #fff; }
+    .faq-header { text-align: center; margin-bottom: 50px; }
+    .faq-list   { max-width: 780px; margin: 0 auto; display: flex; flex-direction: column; gap: 12px; }
+
+    .faq-item {
+      border: 1px solid var(--gray-200); border-radius: var(--radius);
+      overflow: hidden; transition: var(--transition);
+    }
+    .faq-item.open { border-color: var(--green-mid); box-shadow: var(--shadow-sm); }
+
+    .faq-question {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 20px 24px; cursor: pointer; background: #fff;
+      font-size: .97rem; font-weight: 600; color: var(--gray-800);
+      border: none; width: 100%; text-align: left; transition: var(--transition);
+    }
+    [dir="rtl"] .faq-question { text-align: right; }
+    .faq-question:hover { background: var(--gray-50); }
+    .faq-item.open .faq-question { background: rgba(26,92,58,.04); color: var(--green-deep); }
+
+    .faq-icon { width: 28px; height: 28px; border-radius: 50%; background: var(--gray-100); display: flex; align-items: center; justify-content: center; font-size: .75rem; color: var(--gray-600); transition: var(--transition); flex-shrink: 0; margin-left: 12px; }
+    [dir="rtl"] .faq-icon { margin-left: 0; margin-right: 12px; }
+    .faq-item.open .faq-icon { background: var(--green-deep); color: #fff; transform: rotate(180deg); }
+
+    .faq-answer { max-height: 0; overflow: hidden; transition: max-height .4s cubic-bezier(.4,0,.2,1); }
+    .faq-answer-inner { padding: 0 24px 20px; font-size: .92rem; color: var(--gray-600); line-height: 1.8; }
+
+    /* ── CTA Banner ────────────────────────────────────────── */
+    #cta-banner {
+      background: linear-gradient(135deg, var(--orange) 0%, #c95209 100%);
+      padding: 70px 0; text-align: center;
+    }
+    .cta-banner-inner h2 { font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 900; color: #fff; margin-bottom: 14px; }
+    .cta-banner-inner p  { font-size: 1.1rem; color: rgba(255,255,255,.85); margin-bottom: 32px; }
+    .cta-btns { display: flex; flex-wrap: wrap; justify-content: center; gap: 14px; }
+    .btn-white { background: #fff; color: var(--orange); font-weight: 700; box-shadow: 0 4px 20px rgba(0,0,0,.2); }
+    .btn-white:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(0,0,0,.25); }
+
+    /* ── Footer ────────────────────────────────────────────── */
+    #footer { background: var(--gray-800); color: rgba(255,255,255,.75); }
+    .footer-top { padding: 60px 0; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; }
+    .footer-brand p { font-size: .9rem; line-height: 1.8; margin: 16px 0 24px; max-width: 280px; }
+    .footer-social { display: flex; gap: 10px; }
+    .social-btn {
+      width: 38px; height: 38px; border-radius: 8px; background: rgba(255,255,255,.08);
+      display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,.7);
+      text-decoration: none; font-size: .9rem; transition: var(--transition);
+    }
+    .social-btn:hover { background: var(--green-mid); color: #fff; }
+
+    .footer-col h4 { font-size: .9rem; font-weight: 700; color: #fff; margin-bottom: 18px; }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-col ul a { color: rgba(255,255,255,.65); text-decoration: none; font-size: .88rem; transition: var(--transition); }
+    .footer-col ul a:hover { color: var(--orange-light); }
+
+    .footer-contact { display: flex; flex-direction: column; gap: 12px; }
+    .footer-contact-item { display: flex; align-items: flex-start; gap: 10px; font-size: .88rem; }
+    .footer-contact-item i { color: var(--orange-light); margin-top: 2px; }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,.08); padding: 22px 0;
+      display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+      gap: 16px; font-size: .82rem;
+    }
+    .payment-badges { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+    .payment-badge {
+      background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.12);
+      border-radius: 6px; padding: 5px 12px; font-size: .78rem; font-weight: 700;
+      color: rgba(255,255,255,.75);
+    }
+
+    /* ── Donation Modal ────────────────────────────────────── */
+    .modal-overlay {
+      position: fixed; inset: 0; background: rgba(0,0,0,.6); backdrop-filter: blur(4px);
+      z-index: 2000; display: flex; align-items: center; justify-content: center;
+      padding: 20px; opacity: 0; pointer-events: none; transition: opacity .3s;
+    }
+    .modal-overlay.open { opacity: 1; pointer-events: all; }
+
+    .modal {
+      background: #fff; border-radius: 22px; width: 100%; max-width: 520px;
+      max-height: 92vh; overflow-y: auto; box-shadow: var(--shadow-lg);
+      transform: translateY(30px) scale(.97); transition: transform .35s cubic-bezier(.4,0,.2,1);
+    }
+    .modal-overlay.open .modal { transform: translateY(0) scale(1); }
+
+    .modal-header {
+      background: linear-gradient(135deg, var(--green-deep), var(--green-mid));
+      padding: 28px 28px 80px; position: relative; border-radius: 22px 22px 0 0;
+    }
+    .modal-close {
+      position: absolute; top: 18px; right: 18px;
+      background: rgba(255,255,255,.2); border: none; color: #fff;
+      width: 34px; height: 34px; border-radius: 50%; cursor: pointer;
+      font-size: 1rem; display: flex; align-items: center; justify-content: center;
+      transition: var(--transition);
+    }
+    .modal-close:hover { background: rgba(255,255,255,.35); }
+    .modal-header h2 { color: #fff; font-size: 1.4rem; font-weight: 800; margin-bottom: 6px; }
+    .modal-header p  { color: rgba(255,255,255,.75); font-size: .9rem; }
+
+    .modal-campaign-tag { background: rgba(255,255,255,.15); border-radius: 50px; padding: 5px 14px; display: inline-flex; align-items: center; gap: 6px; color: rgba(255,255,255,.9); font-size: .8rem; font-weight: 600; margin-top: 12px; }
+
+    .modal-body { padding: 0 28px 28px; margin-top: -52px; }
+
+    .modal-impact-card {
+      background: #fff; border: 1px solid var(--gray-200); border-radius: var(--radius);
+      padding: 18px 20px; margin-bottom: 24px; display: flex; align-items: center;
+      gap: 14px; box-shadow: var(--shadow-sm);
+    }
+    .modal-impact-icon { width: 46px; height: 46px; border-radius: 12px; background: rgba(26,92,58,.1); display: flex; align-items: center; justify-content: center; font-size: 1.2rem; color: var(--green-deep); flex-shrink: 0; }
+    .modal-impact-text { font-size: .85rem; color: var(--gray-600); line-height: 1.5; }
+    .modal-impact-text strong { color: var(--green-deep); font-weight: 700; }
+
+    .modal-label { font-size: .82rem; font-weight: 700; color: var(--gray-600); text-transform: uppercase; letter-spacing: .06em; margin-bottom: 12px; }
+
+    .amount-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 10px; }
+    .amount-btn {
+      padding: 14px 8px; border: 2px solid var(--gray-200); border-radius: 10px;
+      background: #fff; cursor: pointer; font-size: .95rem; font-weight: 700;
+      color: var(--gray-700); transition: var(--transition); text-align: center;
+    }
+    .amount-btn:hover { border-color: var(--green-mid); color: var(--green-deep); background: rgba(26,92,58,.04); }
+    .amount-btn.active { border-color: var(--green-deep); background: var(--green-deep); color: #fff; }
+    .amount-btn small { display: block; font-size: .68rem; font-weight: 400; opacity: .75; margin-top: 2px; }
+
+    .custom-amount-row { margin-bottom: 22px; }
+    .custom-input-wrap { position: relative; }
+    .currency-sign { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); font-weight: 700; color: var(--gray-400); font-size: 1rem; }
+    [dir="rtl"] .currency-sign { left: auto; right: 16px; }
+    .custom-input-wrap input {
+      width: 100%; padding: 13px 16px 13px 36px; border: 2px solid var(--gray-200);
+      border-radius: 10px; font-size: 1rem; font-weight: 600; outline: none;
+      transition: var(--transition); color: var(--gray-800);
+    }
+    [dir="rtl"] .custom-input-wrap input { padding: 13px 36px 13px 16px; }
+    .custom-input-wrap input:focus { border-color: var(--green-deep); }
+
+    .payment-methods { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 24px; }
+    .payment-method-btn {
+      padding: 14px 10px; border: 2px solid var(--gray-200); border-radius: 10px;
+      background: #fff; cursor: pointer; font-size: .85rem; font-weight: 600;
+      color: var(--gray-600); transition: var(--transition);
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+    }
+    .payment-method-btn:hover  { border-color: var(--green-mid); color: var(--green-deep); }
+    .payment-method-btn.active { border-color: var(--green-deep); background: rgba(26,92,58,.06); color: var(--green-deep); }
+    .payment-method-btn i { font-size: 1.1rem; }
+
+    .modal-donate-btn {
+      width: 100%; padding: 16px; background: var(--orange); color: #fff;
+      border: none; border-radius: 12px; font-size: 1.05rem; font-weight: 800;
+      cursor: pointer; transition: var(--transition); display: flex;
+      align-items: center; justify-content: center; gap: 10px; margin-bottom: 14px;
+    }
+    .modal-donate-btn:hover { background: #c95209; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(232,96,10,.4); }
+
+    .modal-security { display: flex; align-items: center; justify-content: center; gap: 6px; font-size: .78rem; color: var(--gray-400); }
+    .modal-security i { color: var(--green-mid); }
+
+    .modal-recurring { display: flex; align-items: center; gap: 10px; padding: 14px 16px; background: var(--gray-50); border-radius: 10px; margin-bottom: 22px; cursor: pointer; border: 2px solid var(--gray-200); transition: var(--transition); }
+    .modal-recurring:hover { border-color: var(--green-mid); }
+    .modal-recurring input { width: 18px; height: 18px; cursor: pointer; accent-color: var(--green-deep); }
+    .modal-recurring-text { font-size: .88rem; font-weight: 600; color: var(--gray-700); }
+    .modal-recurring-sub  { font-size: .76rem; color: var(--gray-400); }
+
+    /* ── Success Screen ────────────────────────────────────── */
+    .success-screen {
+      display: none; flex-direction: column; align-items: center;
+      text-align: center; padding: 40px 28px;
+    }
+    .success-screen.show { display: flex; }
+    .success-icon {
+      width: 80px; height: 80px; border-radius: 50%; background: rgba(26,92,58,.1);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2rem; color: var(--green-deep); margin-bottom: 22px;
+      animation: pop .5s cubic-bezier(.4,0,.2,1);
+    }
+    @keyframes pop { 0%{transform:scale(0)} 70%{transform:scale(1.15)} 100%{transform:scale(1)} }
+    .success-screen h3 { font-size: 1.5rem; font-weight: 800; color: var(--gray-800); margin-bottom: 10px; }
+    .success-screen p  { color: var(--gray-600); margin-bottom: 28px; line-height: 1.7; }
+
+    /* ── Scroll-to-top ─────────────────────────────────────── */
+    #scroll-top {
+      position: fixed; bottom: 28px; right: 28px; width: 48px; height: 48px;
+      background: var(--green-deep); color: #fff; border: none; border-radius: 50%;
+      cursor: pointer; font-size: 1rem; display: flex; align-items: center; justify-content: center;
+      box-shadow: var(--shadow-md); z-index: 900; opacity: 0; pointer-events: none;
+      transition: var(--transition);
+    }
+    #scroll-top.visible { opacity: 1; pointer-events: all; }
+    #scroll-top:hover { background: var(--green-mid); transform: translateY(-3px); }
+
+    /* ── Animations ────────────────────────────────────────── */
+    .fade-up {
+      opacity: 0; transform: translateY(30px);
+      transition: opacity .7s ease, transform .7s ease;
+    }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+    .fade-up:nth-child(2) { transition-delay: .1s; }
+    .fade-up:nth-child(3) { transition-delay: .2s; }
+    .fade-up:nth-child(4) { transition-delay: .3s; }
+
+    /* ── Responsive ────────────────────────────────────────── */
+    @media (max-width: 1024px) {
+      .footer-top { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 768px) {
+      .nav-links, .nav-right .btn { display: none; }
+      .burger { display: flex; }
+      .hero-grid { grid-template-columns: 1fr !important; }
+      .hero-image-side { display: none; }
+      .updates-grid { grid-template-columns: 1fr; }
+      .update-main { grid-row: span 1; min-height: 280px; }
+      .footer-top { grid-template-columns: 1fr; }
+      .section { padding: 60px 0; }
+      .amount-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 480px) {
+      .hero h1 { font-size: 2rem; }
+      .impact-grid { grid-template-columns: repeat(2, 1fr); }
+      .payment-methods { grid-template-columns: 1fr 1fr; }
+    }
+
+    /* ── RTL Overrides ─────────────────────────────────────── */
+    [dir="rtl"] .faq-question { text-align: right; }
+    [dir="rtl"] .hero-content { text-align: right; }
+    [dir="rtl"] .hero-btns { flex-direction: row-reverse; }
+    [dir="rtl"] .campaign-category { left: auto; right: 14px; }
+    [dir="rtl"] .campaign-urgent   { right: auto; left: 14px; }
+    [dir="rtl"] .update-tag { }
+    [dir="rtl"] .footer-brand p { text-align: right; }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════════ URGENCY BAR -->
+<div class="urgency-bar">
+  <i class="fas fa-exclamation-triangle"></i>
+  <strong>عاجل:</strong> أكثر من 2.2 مليون شخص في غزة بحاجة ماسة للمساعدة الآن — تبرعك ينقذ حياة. تواصل: <strong dir="ltr">+972 599 869 056</strong>
+  <i class="fas fa-heart"></i>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════ NAVBAR -->
+<nav id="navbar">
+  <div class="container nav-inner">
+    <a href="#" class="logo">
+      <div class="logo-icon"><i class="fas fa-hand-holding-heart"></i></div>
+      <span class="logo-text">زكاة <span>غزة</span></span>
+    </a>
+
+    <ul class="nav-links">
+      <li><a href="#about">من نحن</a></li>
+      <li><a href="#impact">إنجازاتنا</a></li>
+      <li><a href="#campaigns">الحملات</a></li>
+      <li><a href="#how-donate">كيف تتبرع</a></li>
+      <li><a href="#updates">آخر الأخبار</a></li>
+    </ul>
+
+    <div class="nav-right">
+      <button class="lang-btn" id="langToggle" aria-label="Toggle language">
+        <i class="fas fa-globe"></i> <span id="langLabel">العربية</span>
+      </button>
+      <a href="https://wa.me/972599869056?text=السلام عليكم، أريد التبرع لصالح أهل غزة 🇵🇸" target="_blank" class="btn btn-primary">
+        <i class="fab fa-whatsapp"></i> تبرع الآن
+      </a>
+    </div>
+
+    <button class="burger" id="burger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#about"      onclick="closeMobileMenu()">من نحن</a>
+  <a href="#impact"    onclick="closeMobileMenu()">إنجازاتنا</a>
+  <a href="#campaigns" onclick="closeMobileMenu()">الحملات</a>
+  <a href="#how-donate" onclick="closeMobileMenu()">كيف تتبرع</a>
+  <a href="#updates"   onclick="closeMobileMenu()">آخر الأخبار</a>
+  <a href="https://wa.me/972599869056?text=السلام عليكم، أريد التبرع لصالح أهل غزة 🇵🇸" target="_blank" class="btn btn-primary" style="width:100%;justify-content:center;">
+    <i class="fab fa-whatsapp"></i> تبرع عبر واتساب
+  </a>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════ ABOUT -->
+<section id="about" class="section about-section">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-img-stack">
+        <div class="about-img-main">
+          <img src="https://images.unsplash.com/photo-1593113598332-cd288d649433?w=800&q=85&fit=crop" alt="توزيع المساعدات في غزة" loading="lazy" />
+        </div>
+        <div class="about-img-secondary">
+          <img src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=400&q=85&fit=crop" alt="أطفال غزة" loading="lazy" />
+        </div>
+        <div class="about-badge">
+          <div class="about-badge-num">٥+</div>
+          <div class="about-badge-label">سنوات من العطاء</div>
+        </div>
+      </div>
+      <div class="about-text">
+        <div class="tag"><i class="fas fa-info-circle"></i> من نحن</div>
+        <h2 class="section-title">مؤسسة زكاة غزة<br>نيابةً عنك على الأرض</h2>
+        <p>نحن فريق ميداني متواجد داخل قطاع غزة، نعمل على مدار الساعة لإيصال المساعدات الإنسانية لأهلنا المحاصرين. كل تبرع يصل مباشرةً إلى مستحقيه دون وسطاء.</p>
+        <p>تواصل معنا مباشرةً عبر واتساب وسنُرسل لك صور وفيديوهات التوزيع الفعلي خلال 48 ساعة من استلام تبرعك. الشفافية التامة هي أساس ثقتنا معك.</p>
+        <p>نستقبل التبرعات من جميع أنحاء العالم ونوزّعها على العائلات المحتاجة من غذاء وماء ودواء وملابس وكسوة شتاء.</p>
+        <div class="about-socials">
+          <a href="https://www.facebook.com/profile.php?id=61589815823569" target="_blank" class="about-social-btn about-social-fb">
+            <i class="fab fa-facebook-f"></i> فيسبوك
+          </a>
+          <a href="https://www.instagram.com/zakat_ga/" target="_blank" class="about-social-btn about-social-ig">
+            <i class="fab fa-instagram"></i> إنستاغرام
+          </a>
+          <a href="https://wa.me/972599869056?text=السلام عليكم، أريد التبرع لصالح أهل غزة 🇵🇸" target="_blank" class="about-social-btn about-social-wa">
+            <i class="fab fa-whatsapp"></i> واتساب مباشر
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════ HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-particles" id="heroParticles"></div>
+
+  <div class="container" style="display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center;" class="hero-grid">
+    <div class="hero-content">
+      <div class="hero-tag">
+        <div class="hero-tag-dot"></div>
+        إغاثة طارئة 2025 — غزة
+      </div>
+      <h1>قف مع غزة: <span>أوصِل الأمل</span> والإغاثة اليوم</h1>
+      <p>آلاف الأسر تعاني الجوع والمرض والتهجير. تبرعك يصل مباشرةً إلى سلال الغذاء والمياه النظيفة والرعاية الطبية والمأوى لمن هم في أمسّ الحاجة.</p>
+      <div class="hero-btns">
+        <a href="https://wa.me/972599869056?text=السلام عليكم، أريد التبرع لصالح أهل غزة 🇵🇸" target="_blank" class="btn btn-primary">
+          <i class="fab fa-whatsapp"></i> تبرع عبر واتساب الآن
+        </a>
+        <a href="#campaigns" class="btn btn-outline">
+          <i class="fas fa-th-large"></i> عرض الحملات
+        </a>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <div class="hero-stat-num">+٥٠٠٠</div>
+          <div class="hero-stat-label">متبرع وثّقنا شكره</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-num">+١٢٨ ألف</div>
+          <div class="hero-stat-label">شخص استفاد</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-num">٩٧٪</div>
+          <div class="hero-stat-label">يصل للميدان مباشرةً</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-image-side">
+      <div class="hero-card">
+        <div class="hero-card-live">
+          <div class="hero-tag-dot"></div> Live Campaign
+        </div>
+        <h3>Emergency Food Baskets</h3>
+        <p>Feeding families for 30 days</p>
+        <div class="mini-progress">
+          <div class="mini-progress-bar" style="width:74%"></div>
+        </div>
+        <div class="mini-progress-label">
+          <span>$74,200 raised</span><span>Goal: $100K</span>
+        </div>
+        <div style="margin-top:16px;">
+          <div class="mini-progress-label" style="margin-bottom:6px;">
+            <span style="color:rgba(255,255,255,.9);font-weight:600;">74% funded</span>
+            <span>1,847 donors</span>
+          </div>
+        </div>
+        <a href="https://wa.me/972599869056?text=السلام عليكم، أريد التبرع في حملة سلال الغذاء 🧺🇵🇸" target="_blank" class="btn btn-primary" style="width:100%;justify-content:center;margin-top:14px;">
+          <i class="fab fa-whatsapp"></i> تبرع الآن
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════ IMPACT DASHBOARD -->
+<section id="impact" class="section">
+  <div class="container">
+    <div class="impact-header">
+      <div class="tag"><i class="fas fa-chart-bar"></i> إنجازاتنا</div>
+      <h2 class="section-title">مساعدة حقيقية. أرقام حقيقية.</h2>
+      <p class="section-sub" style="margin:0 auto;text-align:center;">كل تبرع يُتابَع ويُوثَّق. إليك ما حقّقناه معاً بفضل المتبرعين الكرام حول العالم.</p>
+    </div>
+    <div class="impact-grid">
+      <div class="impact-card fade-up">
+        <div class="impact-icon" style="background:rgba(59,130,246,.1);color:#3b82f6;">
+          <i class="fas fa-utensils"></i>
+        </div>
+        <div class="impact-num" data-target="842000">0</div>
+        <div class="impact-label">وجبة غذائية وُزِّعت</div>
+      </div>
+      <div class="impact-card fade-up">
+        <div class="impact-icon" style="background:rgba(6,182,212,.1);color:#06b6d4;">
+          <i class="fas fa-tint"></i>
+        </div>
+        <div class="impact-num" data-target="1200000">0</div>
+        <div class="impact-label">لتر مياه نظيفة</div>
+      </div>
+      <div class="impact-card fade-up">
+        <div class="impact-icon" style="background:rgba(16,185,129,.1);color:#10b981;">
+          <i class="fas fa-home"></i>
+        </div>
+        <div class="impact-num" data-target="4800">0</div>
+        <div class="impact-label">عائلة مكفولة</div>
+      </div>
+      <div class="impact-card fade-up">
+        <div class="impact-icon" style="background:rgba(239,68,68,.1);color:#ef4444;">
+          <i class="fas fa-medkit"></i>
+        </div>
+        <div class="impact-num" data-target="32000">0</div>
+        <div class="impact-label">حقيبة طبية وُزِّعت</div>
+      </div>
+      <div class="impact-card fade-up">
+        <div class="impact-icon" style="background:rgba(245,158,11,.1);color:#f59e0b;">
+          <i class="fas fa-school"></i>
+        </div>
+        <div class="impact-num" data-target="6200">0</div>
+        <div class="impact-label">طفل حظي بالدعم</div>
+      </div>
+      <div class="impact-card fade-up">
+        <div class="impact-icon" style="background:rgba(139,92,246,.1);color:#8b5cf6;">
+          <i class="fas fa-hands-helping"></i>
+        </div>
+        <div class="impact-num" data-target="18400">0</div>
+        <div class="impact-label">متطوع شارك في الميدان</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════ CAMPAIGNS -->
+<section id="campaigns" class="section" style="background:var(--gray-50);">
+  <div class="container">
+    <div class="campaigns-header" style="display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:20px;">
+      <div>
+        <div class="tag"><i class="fas fa-fire"></i> حملات نشطة</div>
+        <h2 class="section-title">اختر كيف تساعد</h2>
+        <p class="section-sub">كل حملة تصل مباشرةً لمستحقيها. اختر القضية الأقرب لقلبك وتواصل معنا عبر واتساب.</p>
+      </div>
+      <a href="https://wa.me/972599869056?text=السلام عليكم، أريد التبرع لصالح أهل غزة 🇵🇸" target="_blank" class="btn btn-green"><i class="fab fa-whatsapp"></i> تبرع لجميع الحملات</a>
+    </div>
+
+    <div class="campaigns-grid">
+
+      <!-- Card 1 -->
+      <div class="campaign-card fade-up">
+        <div class="campaign-img" style="background:linear-gradient(135deg,#1a5c3a,#2d7a52);">
+          <img src="https://images.unsplash.com/photo-1509099836639-18ba1795216d?w=600&q=80&fit=crop" alt="Food Baskets" loading="lazy" />
+          <div class="campaign-category">غذاء طارئ</div>
+          <div class="campaign-urgent"><i class="fas fa-clock"></i> عاجل</div>
+        </div>
+        <div class="campaign-body">
+          <h3>سلال الغذاء الطارئة</h3>
+          <p>سلة غذاء كاملة تكفي عائلة من 5 أفراد بالتغذية الأساسية لمدة شهر كامل.</p>
+          <div class="progress-bar-wrap">
+            <div class="progress-labels">
+              <span class="progress-raised">٧٤,٢٠٠$ جُمعت</span>
+              <span class="progress-goal">الهدف: ١٠٠,٠٠٠$</span>
+            </div>
+            <div class="progress-track"><div class="progress-fill" data-width="74"></div></div>
+            <div class="progress-pct">٧٤٪ مكتملة · ١٨٤٧ متبرع</div>
+          </div>
+          <div class="campaign-footer">
+            <div class="donors-count"><i class="fas fa-users"></i> ١٨٤٧ داعم</div>
+            <a href="https://wa.me/972599869056?text=السلام عليكم، أريد التبرع في حملة سلال الغذاء 🧺🇵🇸" target="_blank" class="btn btn-primary" style="padding:10px 20px;font-size:.85rem;">
+              <i class="fab fa-whatsapp"></i> تبرع
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="campaign-card fade-up">
+        <div class="campaign-img" style="background:linear-gradient(135deg,#1e3a5f,#2d6a9f);">
+          <img src="https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=600&q=80&fit=crop" alt="Medical Aid" loading="lazy" />
+          <div class="campaign-category">طبي</div>
+          <div class="campaign-urgent"><i class="fas fa-clock"></i> عاجل</div>
+        </div>
+        <div class="campaign-body">
+          <h3>الإغاثة الطبية والعيادات الميدانية</h3>
+          <p>تمويل الأدوية واللوازم الجراحية وتشغيل المستشفيات الميدانية للمصابين الحرجين.</p>
+          <div class="progress-bar-wrap">
+            <div class="progress-labels">
+              <span class="progress-raised">١١٨,٦٠٠$ جُمعت</span>
+              <span class="progress-goal">الهدف: ١٥٠,٠٠٠$</span>
+            </div>
+            <div class="progress-track"><div class="progress-fill" data-width="79"></div></div>
+            <div class="progress-pct">٧٩٪ مكتملة · ٢٣١٤ متبرع</div>
+          </div>
+          <div class="campaign-footer">
+            <div class="donors-count"><i class="fas fa-users"></i> ٢٣١٤ داعم</div>
+            <a href="https://wa.me/972599869056?text=السلام عليكم، أريد التبرع في حملة الإغاثة الطبية 🏥🇵🇸" target="_blank" class="btn btn-primary" style="padding:10px 20px;font-size:.85rem;">
+              <i class="fab fa-whatsapp"></i> تبرع
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="campaign-card fade-up">
+        <div class="campaign-img" style="background:linear-gradient(135deg,#0a4a6e,#0891b2);">
+          <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=600&q=80&fit=crop" alt="Clean Water" loading="lazy" />
+          <div class="campaign-category">مياه نظيفة</div>
+        </div>
+        <div class="campaign-body">
+          <h3>توفير المياه النظيفة</h3>
+          <p>توصيل مياه الشرب المنقاة وتركيب أنظمة الترشيح للحدّ من تفشي الأمراض.</p>
+          <div class="progress-bar-wrap">
+            <div class="progress-labels">
+              <span class="progress-raised">٤٢,٣٠٠$ جُمعت</span>
+              <span class="progress-goal">الهدف: ٨٠,٠٠٠$</span>
+            </div>
+            <div class="progress-track"><div class="progress-fill" data-width="53"></div></div>
+            <div class="progress-pct">٥٣٪ مكتملة · ٩٧٦ متبرع</div>
+          </div>
+          <div class="campaign-footer">
+            <div class="donors-count"><i class="fas fa-users"></i> ٩٧٦ داعم</div>
+            <a href="https://wa.me/972599869056?text=السلام عليكم، أريد التبرع في حملة المياه النظيفة 💧🇵🇸" target="_blank" class="btn btn-primary" style="padding:10px 20px;font-size:.85rem;">
+              <i class="fab fa-whatsapp"></i> تبرع
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="campaign-card fade-up">
+        <div class="campaign-img" style="background:linear-gradient(135deg,#4c1d95,#7c3aed);">
+          <img src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=600&q=80&fit=crop" alt="Family Sponsorship" loading="lazy" />
+          <div class="campaign-category">كفالة</div>
+        </div>
+        <div class="campaign-body">
+          <h3>برنامج كفالة الأسر النازحة</h3>
+          <p>اكفل عائلة نازحة وقدّم لها دعماً مالياً شهرياً يشمل الغذاء والإيجار والاحتياجات الأساسية.</p>
+          <div class="progress-bar-wrap">
+            <div class="progress-labels">
+              <span class="progress-raised">٩٦,٠٠٠$ جُمعت</span>
+              <span class="progress-goal">الهدف: ١٢٠,٠٠٠$</span>
+            </div>
+            <div class="progress-track"><div class="progress-fill" data-width="80"></div></div>
+            <div class="progress-pct">٨٠٪ مكتملة · ٣٢٠٠ متبرع</div>
+          </div>
+          <div class="campaign-footer">
+            <div class="donors-count"><i class="fas fa-users"></i> ٣٢٠٠ داعم</div>
+            <a href="https://wa.me/972599869056?text=السلام عليكم، أريد كفالة عائلة من غزة 🏠🇵🇸" target="_blank" class="btn btn-primary" style="padding:10px 20px;font-size:.85rem;">
+              <i class="fab fa-whatsapp"></i> تبرع
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 5 -->
+      <div class="campaign-card fade-up">
+        <div class="campaign-img" style="background:linear-gradient(135deg,#7f1d1d,#dc2626);">
+          <img src="https://images.unsplash.com/photo-1597273047060-d3f3aa43e79d?w=600&q=80&fit=crop" alt="Shelter" loading="lazy" />
+          <div class="campaign-category">مأوى</div>
+          <div class="campaign-urgent"><i class="fas fa-clock"></i> عاجل</div>
+        </div>
+        <div class="campaign-body">
+          <h3>خيام ومأوى طارئ</h3>
+          <p>توفير خيام مقاومة للطقس ومساكن مؤقتة للعائلات التي فقدت كل شيء.</p>
+          <div class="progress-bar-wrap">
+            <div class="progress-labels">
+              <span class="progress-raised">٢٨,٩٠٠$ جُمعت</span>
+              <span class="progress-goal">الهدف: ٧٠,٠٠٠$</span>
+            </div>
+            <div class="progress-track"><div class="progress-fill" data-width="41"></div></div>
+            <div class="progress-pct">٤١٪ مكتملة · ٦١٢ متبرع</div>
+          </div>
+          <div class="campaign-footer">
+            <div class="donors-count"><i class="fas fa-users"></i> ٦١٢ داعم</div>
+            <a href="https://wa.me/972599869056?text=السلام عليكم، أريد التبرع في حملة المأوى الطارئ ⛺🇵🇸" target="_blank" class="btn btn-primary" style="padding:10px 20px;font-size:.85rem;">
+              <i class="fab fa-whatsapp"></i> تبرع
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 6 -->
+      <div class="campaign-card fade-up">
+        <div class="campaign-img" style="background:linear-gradient(135deg,#064e3b,#059669);">
+          <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=600&q=80&fit=crop" alt="Children Education" loading="lazy" />
+          <div class="campaign-category">تعليم</div>
+        </div>
+        <div class="campaign-body">
+          <h3>صندوق تعليم الأطفال</h3>
+          <p>إعادة حق الأطفال في التعلم عبر تمويل فصول مؤقتة وكتب ولوازم مدرسية.</p>
+          <div class="progress-bar-wrap">
+            <div class="progress-labels">
+              <span class="progress-raised">٥٥,٤٠٠$ جُمعت</span>
+              <span class="progress-goal">الهدف: ٩٠,٠٠٠$</span>
+            </div>
+            <div class="progress-track"><div class="progress-fill" data-width="62"></div></div>
+            <div class="progress-pct">٦٢٪ مكتملة · ١٤٢٨ متبرع</div>
+          </div>
+          <div class="campaign-footer">
+            <div class="donors-count"><i class="fas fa-users"></i> ١٤٢٨ داعم</div>
+            <a href="https://wa.me/972599869056?text=السلام عليكم، أريد التبرع في حملة تعليم الأطفال 📚🇵🇸" target="_blank" class="btn btn-primary" style="padding:10px 20px;font-size:.85rem;">
+              <i class="fab fa-whatsapp"></i> تبرع
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════ HOW TO DONATE -->
+<section id="how-donate" class="section how-donate-section">
+  <div class="container">
+    <div style="text-align:center;">
+      <div class="tag"><i class="fab fa-whatsapp"></i> كيفية التبرع</div>
+      <h2 class="section-title">التبرع في 3 خطوات بسيطة عبر واتساب</h2>
+      <p class="section-sub" style="margin:0 auto;text-align:center;">لا حاجة لبطاقات بنكية أو حسابات معقدة — تواصل معنا مباشرةً وسنرشدك خلال ثوانٍ.</p>
+    </div>
+
+    <div class="how-steps">
+      <div class="how-step fade-up">
+        <div class="how-step-num">١</div>
+        <div class="how-step-icon">💬</div>
+        <h3>تواصل معنا عبر واتساب</h3>
+        <p>اضغط على أي زر تبرع في الصفحة وستفتح محادثة واتساب مع فريقنا مباشرةً على الرقم <strong dir="ltr">+972 599 869 056</strong></p>
+      </div>
+      <div class="how-step fade-up">
+        <div class="how-step-num">٢</div>
+        <div class="how-step-icon">💰</div>
+        <h3>حدّد مبلغ التبرع والحملة</h3>
+        <p>أخبرنا بمقدار تبرعك والحملة التي تريد دعمها (غذاء، ماء، دواء، كفالة عائلة) وسنرسل لك تفاصيل الدفع المناسبة.</p>
+      </div>
+      <div class="how-step fade-up">
+        <div class="how-step-num">٣</div>
+        <div class="how-step-icon">📸</div>
+        <h3>استلم إيصالك وصور التوزيع</h3>
+        <p>خلال 48 ساعة من استلام تبرعك، نرسل لك صوراً وفيديوهات حقيقية من الميدان تُثبت وصول مساعدتك لأصحابها.</p>
+      </div>
+      <div class="how-step fade-up">
+        <div class="how-step-num">٤</div>
+        <div class="how-step-icon">🔄</div>
+        <h3>تبرع شهري تلقائي</h3>
+        <p>يمكنك إعداد تبرع شهري ثابت مع فريقنا لضمان استمرار الدعم لنفس العائلة كل شهر بكل يسر وسهولة.</p>
+      </div>
+    </div>
+
+    <a href="https://wa.me/972599869056?text=السلام عليكم، أريد التبرع لصالح أهل غزة 🇵🇸" target="_blank" class="wa-cta-big">
+      <i class="fab fa-whatsapp"></i>
+      <div class="wa-cta-big-text">
+        <div>ابدأ التبرع الآن عبر واتساب</div>
+        <div>+972 599 869 056 · نرد فوراً على مدار الساعة</div>
+      </div>
+    </a>
+
+    <!-- Social Proof Bar -->
+    <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:32px;margin-top:40px;padding-top:32px;border-top:1px solid var(--gray-200);">
+      <div style="text-align:center;">
+        <div style="font-size:1.6rem;font-weight:900;color:var(--green-deep);">+٥٠٠٠</div>
+        <div style="font-size:.82rem;color:var(--gray-600);font-weight:500;">متبرع وثّقنا شكره</div>
+      </div>
+      <div style="text-align:center;">
+        <div style="font-size:1.6rem;font-weight:900;color:var(--green-deep);">48h</div>
+        <div style="font-size:.82rem;color:var(--gray-600);font-weight:500;">متوسط وصول الإيصال</div>
+      </div>
+      <div style="text-align:center;">
+        <div style="font-size:1.6rem;font-weight:900;color:var(--green-deep);">٩٧٪</div>
+        <div style="font-size:.82rem;color:var(--gray-600);font-weight:500;">من كل تبرع يصل للميدان</div>
+      </div>
+      <div style="text-align:center;">
+        <div style="font-size:1.6rem;font-weight:900;color:var(--green-deep);">٢٤/٧</div>
+        <div style="font-size:.82rem;color:var(--gray-600);font-weight:500;">دعم متواصل على واتساب</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════ UPDATES & TRUST -->
+<section id="updates" class="section">
+  <div class="container">
+    <div class="updates-header">
+      <div class="tag"><i class="fas fa-camera"></i> تحديثات ميدانية</div>
+      <h2 class="section-title">توزيع المساعدات على أرض الواقع</h2>
+      <p class="section-sub">نؤمن بالشفافية الكاملة — كل صورة وتحديث يصدر مباشرةً من فرقنا الميدانية الموثّقة داخل غزة.</p>
+    </div>
+
+    <div class="updates-grid">
+      <div class="update-main">
+        <img src="https://images.unsplash.com/photo-1559526324-593bc073d938?w=800&q=80&fit=crop" alt="Field Update" loading="lazy" />
+        <div class="update-main-body">
+          <span class="update-tag"><i class="fas fa-camera"></i> تحديث صوري</span>
+          <h3>توزيع ٣٤٠٠ سلة غذائية في رفح — ١٤ مايو ٢٠٢٥</h3>
+          <p>أكمل فريقنا جولة توزيع كبرى، وصل خلالها لعائلات لم تتلقَّ أي مساعدة منذ أكثر من ثلاثة أسابيع.</p>
+          <div class="update-date"><i class="fas fa-map-marker-alt"></i> رفح، قطاع غزة · منذ ٣ أيام</div>
+        </div>
+      </div>
+
+      <div class="update-small">
+        <div class="update-small-img">
+          <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=300&q=80&fit=crop" alt="Medical" loading="lazy" />
+        </div>
+        <div class="update-small-body">
+          <h4>Field clinic serving 800+ patients weekly in Khan Younis</h4>
+          <p>The mobile clinic funded by donors is now operating 6 days a week with 4 volunteer doctors.</p>
+          <div class="update-small-date"><i class="fas fa-calendar"></i> May 12, 2025</div>
+        </div>
+      </div>
+
+      <div class="update-small">
+        <div class="update-small-img">
+          <img src="https://images.unsplash.com/photo-1604719312566-8912e9227c6a?w=300&q=80&fit=crop" alt="Water" loading="lazy" />
+        </div>
+        <div class="update-small-body">
+          <h4>New water filtration unit installed — 2,000 daily beneficiaries</h4>
+          <p>Portable filtration unit operational in northern Gaza, providing safe drinking water to displaced families.</p>
+          <div class="update-small-date"><i class="fas fa-calendar"></i> May 10, 2025</div>
+        </div>
+      </div>
+
+      <div class="update-small">
+        <div class="update-small-img">
+          <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=300&q=80&fit=crop" alt="Shelter" loading="lazy" />
+        </div>
+        <div class="update-small-body">
+          <h4>150 emergency tents erected for displaced families</h4>
+          <p>New shelter camp established near the southern border, housing over 900 individuals safely.</p>
+          <div class="update-small-date"><i class="fas fa-calendar"></i> May 8, 2025</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="trust-badges">
+      <span class="trust-badges-label">We Are Verified By</span>
+      <div class="trust-badge"><i class="fas fa-shield-alt"></i> UN OCHA Partner</div>
+      <div class="trust-badge"><i class="fas fa-check-circle"></i> GuideStar Certified</div>
+      <div class="trust-badge"><i class="fas fa-lock"></i> 256-bit SSL Secure</div>
+      <div class="trust-badge"><i class="fas fa-star"></i> Charity Navigator 4-Star</div>
+      <div class="trust-badge"><i class="fas fa-file-alt"></i> Annual Audit Published</div>
+      <div class="trust-badge"><i class="fas fa-globe"></i> ICRC Registered</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════ TESTIMONIALS -->
+<section id="testimonials" class="section">
+  <div class="container">
+    <div class="testimonials-header">
+      <div class="tag" style="background:rgba(255,255,255,.1);color:rgba(255,255,255,.9);"><i class="fas fa-quote-left"></i> Donor Stories</div>
+      <h2 class="section-title">Voices From Our Community</h2>
+      <p class="section-sub">Join thousands of donors who have made a difference.</p>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testimonial-card fade-up">
+        <div class="testimonial-stars">★★★★★</div>
+        <p>"I've donated to many charities, but HopeGaza's transparency is unmatched. I can see exactly where my money goes through real photo updates from the field."</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">SK</div>
+          <div>
+            <div class="testimonial-name">Sarah K.</div>
+            <div class="testimonial-role">Monthly Donor · United States</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card fade-up">
+        <div class="testimonial-stars">★★★★★</div>
+        <p>"As a doctor, I know medical aid is the most critical need. This organization gets supplies into the field faster than any other I've seen. Truly life-saving work."</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">AM</div>
+          <div>
+            <div class="testimonial-name">Dr. Ahmed M.</div>
+            <div class="testimonial-role">Donor & Advocate · United Kingdom</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card fade-up">
+        <div class="testimonial-stars">★★★★★</div>
+        <p>"I sponsor a family and receive monthly updates about them. Knowing my $100/month feeds five children and keeps them warm makes every sacrifice worth it."</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">LR</div>
+          <div>
+            <div class="testimonial-name">Layla R.</div>
+            <div class="testimonial-role">Family Sponsor · Canada</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════ FAQ -->
+<section id="faq" class="section" style="background:var(--gray-50);">
+  <div class="container">
+    <div class="faq-header">
+      <div class="tag"><i class="fas fa-question-circle"></i> Common Questions</div>
+      <h2 class="section-title">Frequently Asked Questions</h2>
+      <p class="section-sub" style="margin:0 auto;text-align:center;">Everything you need to know about donating and how we operate.</p>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item open">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          How do I know my donation reaches Gaza?
+          <div class="faq-icon"><i class="fas fa-chevron-down"></i></div>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">Every dollar is tracked end-to-end. We publish monthly financial reports, field photo updates, GPS-tagged delivery records, and independent audits. You receive a donor receipt immediately, and our field team posts weekly updates with visual proof of every distribution. 97% of all funds go directly to aid — only 3% covers operational costs.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          What payment methods do you accept?
+          <div class="faq-icon"><i class="fas fa-chevron-down"></i></div>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">We accept all major credit and debit cards (Visa, Mastercard, Amex), PayPal, Apple Pay, Google Pay, and bank transfers. All transactions are secured with 256-bit SSL encryption. Your financial data is never stored on our servers.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          Can I set up a recurring monthly donation?
+          <div class="faq-icon"><i class="fas fa-chevron-down"></i></div>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">Yes! Monthly giving is the most impactful way to help because it allows us to plan long-term aid programs. You can set up a monthly donation in the donation form by checking the "Make this monthly" option. You can cancel or modify at any time from your donor dashboard or by emailing us.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          Is my donation tax-deductible?
+          <div class="faq-icon"><i class="fas fa-chevron-down"></i></div>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">For donors in the United States, donations are tax-deductible under IRS 501(c)(3) regulations. You will receive an official tax receipt via email within 24 hours of your donation. For donors in other countries, please consult your local tax authority regarding deductibility for international charitable donations.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          How quickly does aid reach people after I donate?
+          <div class="faq-icon"><i class="fas fa-chevron-down"></i></div>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">For active campaigns with pre-positioned supplies, aid can reach beneficiaries within 48–72 hours. We maintain strategic stockpiles in coordination with UN agencies and local partners. For new campaign goals, we begin procurement within 5 business days of reaching a target threshold and deploy within 2 weeks.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          Can I donate in currencies other than USD?
+          <div class="faq-icon"><i class="fas fa-chevron-down"></i></div>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">Yes. Our payment processor automatically converts GBP, EUR, CAD, AUD, SAR, AED, and many other currencies. You will see the exact conversion before completing your donation. No additional conversion fees are charged to donors.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════ CTA BANNER -->
+<section id="cta-banner">
+  <div class="container">
+    <div class="cta-banner-inner">
+      <h2>كل دقيقة تأخير تُكلّف حياة. تصرّف الآن.</h2>
+      <p>طفل في غزة ينام الليلة جائعاً. تبرعك يغيّر ذلك — ابدأ من أي مبلغ عبر واتساب مباشرةً.</p>
+      <div class="cta-btns">
+        <a href="https://wa.me/972599869056?text=السلام عليكم، أريد التبرع لصالح أهل غزة 🇵🇸" target="_blank" class="btn btn-white">
+          <i class="fab fa-whatsapp"></i> تبرع الآن عبر واتساب — أنقذ حياة
+        </a>
+        <a href="#campaigns" class="btn btn-outline"><i class="fas fa-th-large"></i> عرض جميع الحملات</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════ FOOTER -->
+<footer id="footer">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="#" class="logo">
+          <div class="logo-icon"><i class="fas fa-hand-holding-heart"></i></div>
+          <span class="logo-text">زكاة <span>غزة</span></span>
+        </a>
+        <p>فريق ميداني متخصص في إيصال المساعدات الإنسانية لأهلنا في غزة. ٩٧٪ من كل تبرع يصل مباشرةً للمحتاجين دون وسطاء.</p>
+        <div class="footer-social">
+          <a href="https://www.facebook.com/profile.php?id=61589815823569" target="_blank" class="social-btn" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://www.instagram.com/zakat_ga/" target="_blank" class="social-btn" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="https://wa.me/972599869056?text=السلام عليكم، أريد التبرع لصالح أهل غزة 🇵🇸" target="_blank" class="social-btn" aria-label="WhatsApp" style="background:#25d366;color:#fff;"><i class="fab fa-whatsapp"></i></a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4>روابط سريعة</h4>
+        <ul>
+          <li><a href="#about">من نحن</a></li>
+          <li><a href="#impact">إنجازاتنا</a></li>
+          <li><a href="#campaigns">الحملات</a></li>
+          <li><a href="#how-donate">كيف تتبرع</a></li>
+          <li><a href="#updates">آخر الأخبار</a></li>
+          <li><a href="#faq">الأسئلة الشائعة</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>الحملات النشطة</h4>
+        <ul>
+          <li><a href="https://wa.me/972599869056?text=أريد التبرع في حملة سلال الغذاء 🧺" target="_blank">سلال الغذاء</a></li>
+          <li><a href="https://wa.me/972599869056?text=أريد التبرع في حملة الإغاثة الطبية 🏥" target="_blank">الإغاثة الطبية</a></li>
+          <li><a href="https://wa.me/972599869056?text=أريد التبرع في حملة المياه النظيفة 💧" target="_blank">المياه النظيفة</a></li>
+          <li><a href="https://wa.me/972599869056?text=أريد كفالة عائلة من غزة 🏠" target="_blank">كفالة عائلة</a></li>
+          <li><a href="https://wa.me/972599869056?text=أريد التبرع في حملة المأوى الطارئ ⛺" target="_blank">المأوى الطارئ</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>تواصل معنا</h4>
+        <div class="footer-contact">
+          <div class="footer-contact-item">
+            <i class="fab fa-whatsapp" style="color:#25d366;"></i>
+            <a href="https://wa.me/972599869056" target="_blank" style="color:rgba(255,255,255,.75);text-decoration:none;" dir="ltr">+972 599 869 056</a>
+          </div>
+          <div class="footer-contact-item">
+            <i class="fab fa-facebook-f" style="color:#1877f2;"></i>
+            <a href="https://www.facebook.com/profile.php?id=61589815823569" target="_blank" style="color:rgba(255,255,255,.75);text-decoration:none;">صفحتنا على فيسبوك</a>
+          </div>
+          <div class="footer-contact-item">
+            <i class="fab fa-instagram" style="color:#e1306c;"></i>
+            <a href="https://www.instagram.com/zakat_ga/" target="_blank" style="color:rgba(255,255,255,.75);text-decoration:none;">@zakat_ga</a>
+          </div>
+          <div class="footer-contact-item">
+            <i class="fas fa-clock"></i>
+            متاحون ٢٤/٧ للرد على استفساراتك
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>© 2025 زكاة غزة — جميع الحقوق محفوظة | تواصل: <a href="https://wa.me/972599869056" target="_blank" style="color:#25d366;text-decoration:none;" dir="ltr">+972 599 869 056</a></span>
+      <div class="payment-badges">
+        <span style="font-size:.78rem;color:rgba(255,255,255,.4);">تابعنا على:</span>
+        <a href="https://www.facebook.com/profile.php?id=61589815823569" target="_blank" class="payment-badge" style="text-decoration:none;color:rgba(255,255,255,.75);">📘 فيسبوك</a>
+        <a href="https://www.instagram.com/zakat_ga/" target="_blank" class="payment-badge" style="text-decoration:none;color:rgba(255,255,255,.75);">📷 إنستاغرام</a>
+        <a href="https://wa.me/972599869056" target="_blank" class="payment-badge" style="text-decoration:none;color:#25d366;">💬 واتساب</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- No modal needed - all donations go via WhatsApp -->
+
+<!-- WhatsApp Floating Button -->
+<a href="https://wa.me/972599869056?text=السلام عليكم، أريد التبرع لصالح أهل غزة 🇵🇸" target="_blank" class="wa-float" id="waFloat">
+  <div class="wa-float-pulse"></div>
+  <i class="fab fa-whatsapp"></i>
+  <span>تبرع عبر واتساب</span>
+</a>
+
+<!-- Scroll to top -->
+<button id="scroll-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">
+  <i class="fas fa-arrow-up"></i>
+</button>
+
+<!-- ═══════════════════════════════════════════════════════════ SCRIPTS -->
+<script>
+  /* ── Particles ─────────────────────────────────────────── */
+  (function(){
+    const container = document.getElementById('heroParticles');
+    for(let i=0;i<18;i++){
+      const p = document.createElement('div');
+      p.className = 'particle';
+      const size = Math.random()*120+30;
+      p.style.cssText = `
+        width:${size}px;height:${size}px;
+        left:${Math.random()*100}%;top:${Math.random()*100}%;
+        animation-delay:${Math.random()*8}s;
+        animation-duration:${8+Math.random()*6}s;
+      `;
+      container.appendChild(p);
+    }
+  })();
+
+  /* ── Navbar scroll ─────────────────────────────────────── */
+  const navbar = document.getElementById('navbar');
+  const scrollTopBtn = document.getElementById('scroll-top');
+  window.addEventListener('scroll', ()=>{
+    navbar.classList.toggle('scrolled', window.scrollY > 20);
+    scrollTopBtn.classList.toggle('visible', window.scrollY > 400);
+  });
+
+  /* ── Burger menu ───────────────────────────────────────── */
+  document.getElementById('burger').addEventListener('click', ()=>{
+    document.getElementById('mobileMenu').classList.toggle('open');
+  });
+  function closeMobileMenu(){ document.getElementById('mobileMenu').classList.remove('open'); }
+
+  /* ── Language toggle (EN ↔ AR) ─────────────────────────── */
+  let isArabic = false;
+  document.getElementById('langToggle').addEventListener('click', ()=>{
+    isArabic = !isArabic;
+    const html = document.documentElement;
+    html.setAttribute('dir', isArabic ? 'ltr' : 'rtl');
+    html.setAttribute('lang', isArabic ? 'en' : 'ar');
+    document.getElementById('langLabel').textContent = isArabic ? 'العربية' : 'English';
+  });
+
+  /* ── Intersection Observer — fade-up & counters ────────── */
+  const fadeEls = document.querySelectorAll('.fade-up');
+  const counterEls = document.querySelectorAll('.impact-num[data-target]');
+  const progressEls = document.querySelectorAll('.progress-fill[data-width]');
+
+  const observer = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  },{threshold:.15});
+  fadeEls.forEach(el=>observer.observe(el));
+
+  /* Counters */
+  let countersStarted = false;
+  const counterObserver = new IntersectionObserver((entries)=>{
+    if(entries[0].isIntersecting && !countersStarted){
+      countersStarted = true;
+      counterEls.forEach(el=>{
+        const target = parseInt(el.dataset.target);
+        animateCounter(el, target);
+      });
+    }
+  },{threshold:.3});
+  if(counterEls.length) counterObserver.observe(counterEls[0].closest('section'));
+
+  function animateCounter(el, target){
+    let start=0; const duration=2200; const step=16;
+    const increment = target/(duration/step);
+    const timer = setInterval(()=>{
+      start = Math.min(start+increment, target);
+      el.textContent = Math.floor(start).toLocaleString();
+      if(start>=target) clearInterval(timer);
+    }, step);
+  }
+
+  /* Progress bars */
+  const progObserver = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        e.target.querySelectorAll('.progress-fill[data-width]').forEach(bar=>{
+          setTimeout(()=>{ bar.style.width = bar.dataset.width+'%'; },200);
+        });
+        progObserver.unobserve(e.target);
+      }
+    });
+  },{threshold:.2});
+  document.querySelectorAll('.campaign-card').forEach(c=>progObserver.observe(c));
+
+  /* ── FAQ Accordion ─────────────────────────────────────── */
+  function toggleFaq(btn){
+    const item = btn.closest('.faq-item');
+    const answer = item.querySelector('.faq-answer');
+    const isOpen = item.classList.contains('open');
+
+    document.querySelectorAll('.faq-item.open').forEach(i=>{
+      i.classList.remove('open');
+      i.querySelector('.faq-answer').style.maxHeight = '0';
+    });
+
+    if(!isOpen){
+      item.classList.add('open');
+      answer.style.maxHeight = answer.scrollHeight + 'px';
+    }
+  }
+  /* Open first by default */
+  (function(){
+    const first = document.querySelector('.faq-item.open .faq-answer');
+    if(first) first.style.maxHeight = first.scrollHeight + 'px';
+  })();
+
+  /* ── WhatsApp share helper ──────────────────────────────── */
+  function shareOnWhatsApp(){
+    const msg = 'ساهمت في دعم أهل غزة عبر زكاة غزة! كل تبرع يصنع فرقاً. انضم إلينا: https://wa.me/972599869056';
+    window.open('https://wa.me/?text='+encodeURIComponent(msg),'_blank');
+  }
+
+  /* Smooth highlight nav link on scroll */
+  const sections = document.querySelectorAll('section[id]');
+  window.addEventListener('scroll',()=>{
+    let current='';
+    sections.forEach(s=>{
+      if(window.scrollY >= s.offsetTop-120) current=s.id;
+    });
+    document.querySelectorAll('.nav-links a').forEach(a=>{
+      a.style.color = a.getAttribute('href')==='#'+current ? 'var(--green-deep)' : '';
+      a.style.fontWeight = a.getAttribute('href')==='#'+current ? '700' : '';
+    });
+  });
+</script>
+</body>
+</html>
